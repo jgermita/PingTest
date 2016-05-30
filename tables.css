@@ -1,0 +1,78 @@
+html *
+{
+   font-family: Arial !important;
+   
+   max-width: device-width !important;
+   
+}
+
+body {
+background-color: WhiteSmoke;
+width: 95%;
+}
+
+footer {
+font-size: 50%;
+}
+
+
+h1 {
+font-size: 65%;
+font-style: italic;
+text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+
+h2 {
+font-size: 150%;
+font-style: bold;
+text-align: center;
+}
+@viewport {
+    width: extend-to-zoom 980px;
+    min-zoom: 1;
+    max-zoom: 5;
+}
+
+#headers {
+    background-color: #7c7c7c;
+    color: white;
+}
+button {
+    background-color: #780003;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 75%;
+	width: 48%;
+border: 2px solid WhiteSmoke;
+	border-radius: 8px;
+}
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: none;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+#buttonGroup {
+line-height: 200%;
+}
+tr:nth-child(even) {background-color: #f2f2f2}
+

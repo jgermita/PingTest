@@ -8,13 +8,18 @@ public class PingRequest {
 	private String reqData = "";
 	
 	private int avg = 0;
+	private String alias = "";
 
-	public PingRequest(String address) {
+	private int n = 0;
+
+	public PingRequest(String address, int n, String alias) {
 		this.ipAddress = address;
-
+		this.alias = alias;
+		this.n = n;
 		// Ping address
 		try {
-			Process p = Runtime.getRuntime().exec("ping " + address);
+			Process p = Runtime.getRuntime().exec(
+					"ping " + address + " -n " + n);
 			BufferedReader inputStream = new BufferedReader(
 					new InputStreamReader(p.getInputStream()));
 
@@ -39,8 +44,10 @@ public class PingRequest {
 			time = reqData.split(", Average = ")[1].split("ms")[0];
 		}
 		avg = Integer.parseInt(time);
-		
-		
+	}
+
+	public void ping() {
+		new PingRequest(this.ipAddress, this.n, this.alias);
 	}
 	
 	public String getAddress() {
@@ -57,11 +64,15 @@ public class PingRequest {
 			return "HOST UNREACHABLE!";
 		}
 
-		double health = (530 - (double) input) / 500.0;
+		double health = (1030 - (double) input) / 1000.0;
 		health = health * 100.0;
 		health = Math.min(health, 100.0);
 		return health + "%";
 
+	}
+
+	public String getAlias() {
+		return this.alias;
 	}
 
 	public String toString() {

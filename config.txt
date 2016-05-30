@@ -1,0 +1,12 @@
+output=index.html
+pings=1
+
+**ADDRESSES**
+**How to add address: **
+**a=ip address or host name,Alias/comment** 
+a=google.com,Google
+a=facebook.com,Facebook
+a=microsoft.com,Microsoft
+a=127.0.0.1,localhost
+a=8.8.8.8,Google DNS 1
+a=4.4.4.4,Google DNS 2
