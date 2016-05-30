@@ -9,9 +9,6 @@ public class main {
 
 	public static void main(String[] args) {
 
-		String[] addresses = { "google.com", "facebook.com", "microsoft.com",
-				"127.0.0.1", "reddit.com", "youtube.com", "8.8.8.8", "4.4.4.4" };
-		
 		String outputFile = "index.html";
 		int pings = 4;
 		PingRequestReport report = new PingRequestReport(
@@ -23,25 +20,38 @@ public class main {
 		try {
 			File config = new File("config.txt");
 			BufferedReader br = new BufferedReader(new FileReader(config));
-			
+
 			String line = "";
-			while((line = br.readLine()) != null) {
-				if(line.startsWith("output=")) {
+			while ((line = br.readLine()) != null) {
+				if (line.startsWith("output=")) {
 					outputFile = line.split("output=")[1];
-				} else if(line.startsWith("pings=")) {
+				} else if (line.startsWith("pings=")) {
 					pings = Integer.parseInt(line.split("pings=")[1]);
-				} else if(line.startsWith("a=")) {
+				} else if (line.startsWith("a=")) {
 					String address = line.split("a=")[1].split(",")[0];
 					String alias = line.split("a=")[1].split(",")[1];
 					report.add(new PingRequest(address, pings, alias));
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		do {
-			
+			try {
+				File config = new File("config.txt");
+				BufferedReader br = new BufferedReader(new FileReader(config));
+
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					if (line.startsWith("output=")) {
+						outputFile = line.split("output=")[1];
+					} else if (line.startsWith("pings=")) {
+						pings = Integer.parseInt(line.split("pings=")[1]);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			report.update();
 

@@ -63,7 +63,7 @@ public class PingRequestReport {
 				healthColor = "7c7c7c";
 			} else if (health > 0 && health <= 30.0) {
 				healthColor = "ff0000";
-			} else if (health > 30.0 && health < 60.0) {
+			} else if (health > 50.0 && health < 80.0) {
 				healthColor = "ffff00";
 			} else {
 				healthColor = "00ff00";
