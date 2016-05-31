@@ -10,7 +10,7 @@ public class PingRequest {
 	private int avg = 0;
 	private String alias = "";
 
-	private int n = 0;
+	public int n = 0;
 
 	public PingRequest(String address, int n, String alias) {
 		this.ipAddress = address;
@@ -47,7 +47,34 @@ public class PingRequest {
 	}
 
 	public void ping() {
-		new PingRequest(this.ipAddress, this.n, this.alias);
+		// Ping address
+		try {
+			Process p = Runtime.getRuntime().exec(
+					"ping " + ipAddress + " -n " + n);
+			BufferedReader inputStream = new BufferedReader(
+					new InputStreamReader(p.getInputStream()));
+
+			String s = "";
+			// reading output stream of the command
+			while ((s = inputStream.readLine()) != null) {
+				reqData = reqData + s + "\n";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// System.out.println(reqData);
+		
+		// Parse output
+		String time = "";
+		// If host is unreachable, ping won't contain average stats
+		if (!reqData.contains(", Average = ")) {
+			time = "-1";
+		} else {
+			time = reqData.split(", Average = ")[1].split("ms")[0];
+		}
+		avg = Integer.parseInt(time);
 	}
 	
 	public String getAddress() {

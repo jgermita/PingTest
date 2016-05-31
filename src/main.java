@@ -17,6 +17,8 @@ public class main {
 //			System.out.println("Pinging " + s + "...");
 //			report.add(new PingRequest(s, 8));
 //		}
+		
+		int interval = 60;
 		try {
 			File config = new File("config.txt");
 			BufferedReader br = new BufferedReader(new FileReader(config));
@@ -31,12 +33,16 @@ public class main {
 					String address = line.split("a=")[1].split(",")[0];
 					String alias = line.split("a=")[1].split(",")[1];
 					report.add(new PingRequest(address, pings, alias));
+				} else if (line.startsWith("interval=")) {
+					interval = Integer.parseInt(line.split("interval=")[1]);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		do {
+			report = new PingRequestReport(
+					System.currentTimeMillis());
 			try {
 				File config = new File("config.txt");
 				BufferedReader br = new BufferedReader(new FileReader(config));
@@ -47,11 +53,20 @@ public class main {
 						outputFile = line.split("output=")[1];
 					} else if (line.startsWith("pings=")) {
 						pings = Integer.parseInt(line.split("pings=")[1]);
+					} else if (line.startsWith("a=")) {
+						String address = line.split("a=")[1].split(",")[0];
+						String alias = line.split("a=")[1].split(",")[1];
+						report.add(new PingRequest(address, pings, alias));
+					} else if (line.startsWith("interval=")) {
+						interval = Integer.parseInt(line.split("interval=")[1]);
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			report.setInterval(interval);
+			
 
 			report.update();
 
@@ -70,7 +85,7 @@ public class main {
 				bw.write(report.toHtml());
 				bw.close();
 
-				Thread.sleep(60000);
+				Thread.sleep(interval * 1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

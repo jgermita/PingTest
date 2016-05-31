@@ -32,6 +32,12 @@ public class PingRequestReport {
 			p.ping();
 		}
 	}
+	
+	
+	int interval = 60;
+	public void setInterval(int interval) {
+		this.interval = interval;
+	}
 
 	public String toHtml() {
 		String data = "";
@@ -76,7 +82,7 @@ public class PingRequestReport {
 .getHealth()) + "<br>";
 		}
 
-		return "<meta http-equiv=\"refresh\" content=\"60\" >"
+		return "<meta http-equiv=\"refresh\" content=\"" + interval +"\" >"
 				+ "<META HTTP-EQUIV=\"CACHE-CONTROL\" CONTENT=\"NO-CACHE\">"
 				+ "<META HTTP-EQUIV=\"EXPIRES\" CONTENT=\"Mon, 22 Jul 2002 11:12:01 GMT\">"
 				+ "<head><link rel=\"stylesheet\" type=\"text/css\" href=\"tables.css\"><meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"><script src=\"sorttable.js\"></script></head>"
